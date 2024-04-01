@@ -11,7 +11,7 @@ extern int fd;
 
 void errnf(void)
 {
-        dprintf(STDERR_FILENO ,"USAGE: monty file\n");
+        fprintf(stderr ,"USAGE: monty file\n");
         exit(EXIT_FAILURE);
 }
 
@@ -23,7 +23,7 @@ void errnf(void)
 
 void errno(unsigned int line_num, char opcode[])
 {
-        dprintf(STDERR_FILENO ,"L%u: unknown instruction %s\n", line_num, opcode);
+        fprintf(stderr ,"L%u: unknown instruction %s\n", line_num, opcode);
         close(fd);
         exit(EXIT_FAILURE);
 }
@@ -35,7 +35,7 @@ void errno(unsigned int line_num, char opcode[])
 
 void errco(char *filename)
 {
-        dprintf(STDERR_FILENO, "Error: Can't open file %s\n", filename);
+        fprintf(stderr, "Error: Can't open file %s\n", filename);
         exit(EXIT_FAILURE);
 }
 
@@ -45,7 +45,7 @@ void errco(char *filename)
 
 void errcp(unsigned int line_num)
 {
-        dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_num);
+        fprintf(stderr, "L%u: usage: push integer\n", line_num);
         close(fd);
         exit(EXIT_FAILURE);
 }
@@ -56,7 +56,7 @@ void errcp(unsigned int line_num)
 
 void errcm(void)
 {
-        dprintf(STDERR_FILENO, "Error: malloc failed\n");
+        fprintf(stderr, "Error: malloc failed\n");
         close(fd);
         exit(EXIT_FAILURE);
 }

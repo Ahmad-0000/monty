@@ -74,7 +74,6 @@ void errcm(void);
 /*              Error Messages Functions 2              */
 
 void errcpi(unsigned int line_num);
-int dprintf(int fd, const char *format, ...);
 void errcs(unsigned int line_num);
 void errca(unsigned int line_num);
 void errcsb(unsigned int line_num);

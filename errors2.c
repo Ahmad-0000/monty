@@ -12,7 +12,7 @@ extern int fd;
 
 void errcpi(unsigned int line_num)
 {
-        dprintf(STDERR_FILENO, "L%u: can't pint, stack empty\n", line_num);
+        fprintf(stderr, "L%u: can't pint, stack empty\n", line_num);
         close(fd);
         exit(EXIT_FAILURE);
 }
@@ -24,7 +24,7 @@ void errcpi(unsigned int line_num)
 
 void errcs(unsigned int line_num)
 {
-        dprintf(STDERR_FILENO, "L%u: can't swap, stack too short\n", line_num);
+        fprintf(stderr, "L%u: can't swap, stack too short\n", line_num);
         close(fd);
         exit(EXIT_FAILURE);
 }
@@ -36,14 +36,14 @@ void errcs(unsigned int line_num)
 
 void errca(unsigned int line_num)
 {
-        dprintf(STDERR_FILENO, "L%u: can't add, stack too short\n", line_num);
+        fprintf(stderr, "L%u: can't add, stack too short\n", line_num);
         close(fd);
         exit(EXIT_FAILURE);
 }
 
 void errcsb(unsigned int line_num)
 {
-        dprintf(STDERR_FILENO, "L%u: can't sub, stack too short\n", line_num);
+        fprintf(stderr, "L%u: can't sub, stack too short\n", line_num);
         close(fd);
         exit(EXIT_FAILURE);
 }
