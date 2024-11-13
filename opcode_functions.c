@@ -10,28 +10,17 @@ void push(char **linearray, stack_t **rear, unsigned int linenum)
         stack_t *new_node;
 
 	if (!linearray[1])
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", linenum);
 		goto error;
-	}
 	if ((linearray[1][0] < '0' || linearray[1][0] > '9') && linearray[1][0] != '-')
-	{
 		fprintf(stderr, "L%d: usage: push integer\n", linenum);
-		goto error;
-	}
 	for (i = 1; linearray[1][i]; i++)
-	{
 		if (linearray[1][i] < '0' || linearray[1][i] > '9')
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", linenum);
 			goto error;
-		}
-	}
 	new_node = malloc(sizeof(*new_node));
 	if (!new_node)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		goto error;
+		goto error2;
 	}
 	new_node->n = atoi(linearray[1]);
 	new_node->next = NULL;
@@ -46,6 +35,8 @@ void push(char **linearray, stack_t **rear, unsigned int linenum)
 	*rear = new_node;
 	return;
 error:
+	fprintf(stderr, "L%d: usage: push integer\n", linenum);
+error2:
 	freewarray(linearray);
 	freestack(*rear);
 	exit(EXIT_FAILURE);
@@ -63,7 +54,7 @@ void pall(char **linearray __attribute__((unused)), stack_t **rear, unsigned int
 	}
 }
 
-void pint(char **linearray __attribute__((unused)), stack_t **rear, unsigned int linenum __attribute__((unused)))
+void pint(char **linearray, stack_t **rear, unsigned int linenum)
 {
 	if (!(*rear))
 	{
@@ -75,7 +66,7 @@ void pint(char **linearray __attribute__((unused)), stack_t **rear, unsigned int
 	printf("%d\n", (*rear)->n);
 }
 
-void pop(char **linearray __attribute__((unused)), stack_t **rear, unsigned int linenum __attribute__((unused)))
+void pop(char **linearray, stack_t **rear, unsigned int linenum)
 {
 	if (!(*rear))
 	{
@@ -94,7 +85,7 @@ void pop(char **linearray __attribute__((unused)), stack_t **rear, unsigned int 
 	*rear = NULL;
 }
 
-void swap(char **linearray __attribute__((unused)), stack_t **rear, unsigned int linenum __attribute__((unused)))
+void swap(char **linearray, stack_t **rear, unsigned int linenum __attribute__((unused)))
 {
 	int temp;
 
