@@ -80,3 +80,20 @@ void rotl(char **linearray __attribute__((unused)), stack_t **rear, unsigned int
 	temp2->prev = NULL;
 	temp2->next = temp1;
 }
+
+
+void rotr(char **linearray __attribute__((unused)), stack_t **rear, unsigned int linenum __attribute__((unused)))
+{
+	stack_t *temp1, *temp2;
+
+	if (!(*rear) || !(*rear)->prev)
+		return;
+	temp1 = temp2 = *rear;
+	while (temp1->prev)
+		temp1 = temp1->prev;
+	temp1->prev = *rear;
+	temp1->prev->next = temp1;
+	temp1->next->prev = NULL;
+	temp1->next = NULL;
+	*rear = temp1;
+}
