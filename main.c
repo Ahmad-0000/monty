@@ -8,7 +8,7 @@
 int fd;
 
 /**
- * main - the main function that invokes all other the other functions
+ * main - Entry point
  * @argc: the number of command line arguments entered
  * @argv: an array of command line arguments entered
  *
