@@ -19,9 +19,10 @@ void errnf(void)
  * @opcode: unknown opcode
  */
 
-void errno(unsigned int line_num, char opcode[])
+void errno(unsigned int line_num, char **linearray)
 {
-        fprintf(stderr ,"L%u: unknown %s\n", line_num, opcode);
+        fprintf(stderr ,"L%u: unknown %s\n", line_num, linearray[0]);
+	freewarray(linearray);
         fclose(fd);
         exit(EXIT_FAILURE);
 }
