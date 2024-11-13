@@ -24,7 +24,10 @@ void add(char **linearray, stack_t **rear, unsigned int linenum)
 	(*rear)->next = NULL;
 }
 
-void nop(char **linearray, stack_t **rear, unsigned int linenum)
+void nop(char **linearray __attribute__((unused)),
+	 stack_t **rear __attribute__((unused)),
+	 unsigned int linenum __attribute__((unused))
+	 )
 {
 	return;
 }
