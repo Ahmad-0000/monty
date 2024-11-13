@@ -48,7 +48,7 @@ void mul(char **linearray, stack_t **rear, unsigned int line_num);
 void mod(char **linearray, stack_t **rear, unsigned int line_num);
 void pchar(char **linearray, stack_t **rear, unsigned int line_num);
 void pstr(char **linearray, stack_t **rear, unsigned int line_num);
-void rotl(stack_t **stack_head, unsigned int line_num);
+void rotl(char **linearray, stack_t **rear, unsigned int line_num);
 void rotr(stack_t **stack_head, unsigned int line_num);
 
 /*              Helping Functions               */

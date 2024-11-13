@@ -26,13 +26,13 @@ void exec(char **linearray, unsigned int linenum, stack_t **rear)
                 {"mod", mod},
                 {"pchar", pchar},
                 {"pstr", pstr},
-                /*{"rotl", rotl},
-                {"rotr", rotr}*/
+                {"rotl", rotl},
+                /*{"rotr", rotr}*/
         };
 
 	if (!linearray[0])
 		return;
-        for (i = 0; i < 13; i++)
+        for (i = 0; i < 14; i++)
        	{
 		if (!strcmp(linearray[0], array[i].opcode))
 		{

@@ -64,3 +64,19 @@ void pstr(char **linearray __attribute__((unused)), stack_t **rear, unsigned int
 	}
 	putchar('\n');
 }
+
+void rotl(char **linearray __attribute__((unused)), stack_t **rear, unsigned int linenum __attribute__((unused)))
+{
+	stack_t *temp1, *temp2;
+
+	if (!(*rear) || !(*rear)->prev)
+		return;
+	temp1 = temp2 = *rear;
+	*rear = (*rear)->prev;
+	while (temp1->prev)
+		temp1 = temp1->prev;
+	temp2->prev->next = NULL;
+	temp1->prev = temp2;
+	temp2->prev = NULL;
+	temp2->next = temp1;
+}
