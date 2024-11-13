@@ -30,3 +30,21 @@ void mod(char **linearray, stack_t **rear, unsigned int linenum)
 	free((*rear)->next);
 	(*rear)->next = NULL;
 }
+
+void pchar(char **linearray, stack_t **rear, unsigned int linenum)
+{
+	if (!(*rear))
+	{
+		fprintf(stderr, "L%d: can't pchar, stack is empty\n", linenum);
+		freewarray(linearray);
+		exit(EXIT_FAILURE);
+	}
+	if ((*rear)->n > 127 || (*rear)->n < 0)
+	{
+		fprintf(stderr, "L%d: can't pchar, value is out of range", linenum);
+		freewarray(linearray);
+		freestack(*rear);
+		exit(EXIT_FAILURE);
+	}
+	printf("%c\n", (*rear)->n);
+}
