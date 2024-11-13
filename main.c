@@ -38,6 +38,12 @@ int main(int argc, char *argv[])
 		errco(argv[1]);
 	while (getline(&line, &n, fd) != -1)
 	{
+		for (i = 0; line[i]; i++)
+			if (line[i] == '#')
+			{
+				line[i] = '\0';
+				break;
+			}	
 		linearray = strtow(line);
 		exec(linearray, linenum, &rear);
 		freewarray(linearray);
