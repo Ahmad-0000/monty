@@ -1,11 +1,11 @@
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include "monty.h"
+#include <stdio.h>
 
-int fd;
+FILE *fd;
 
 /**
  * main - Entry point
@@ -17,31 +17,36 @@ int fd;
 
 int main(int argc, char *argv[])
 {
-	int i = 0;
-	int char_read;
-	char opcode[6], c;
-	unsigned int line_num = 1;
-	stack_t *stack_head;
+	int i, namelength;
+	size_t n = 0;
+	unsigned int linenum = 1;
+	stack_t *rear = NULL;
+	char *line = NULL;
+	char **linearray = NULL;
 
-	stack_head = NULL;
 	if (argc != 2)
 		errnf();
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	namelength = strlen(argv[1]);
+	for (i = namelength - 1; i >= 0; i--)
+		if (argv[1][i] == '.')
+		{
+			if (!argv[1][i + 1])
+				break;
+			else if (argv[1][i + 1] != 'm' || argv[1][i + 2])
+				exit(EXIT_FAILURE);
+		}
+	fd = fopen(argv[1], "r");
+	if (!fd)
 		errco(argv[1]);
-	fill(6, opcode);
-	char_read = read(fd, &c, 1);
-	while (char_read > 0)
+	while (getline(&line, &n, fd) != -1)
 	{
-		fill(6, opcode);
-		c = skip_before(c, &char_read, &line_num);
-		i = 0;
-		opcode[i++] = c;
-		line_num += get_opcode(opcode, c, i, &char_read);
-		execute(opcode, line_num, &stack_head);
-		line_num++;
-		char_read = read(fd, &c, 1);
+		linearray = strtow(line);
+		exec(linearray, linenum, &rear);
+		freewarray(linearray);
+		linenum++;
 	}
-	close(fd);
+	free(line);
+	freestack(rear);
+	fclose(fd);
 	return (0);
 }

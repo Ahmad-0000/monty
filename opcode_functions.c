@@ -4,71 +4,68 @@
 #include <fcntl.h>
 #include "monty.h"
 
-extern int fd;
 
-void push(stack_t **stack_head, unsigned int line_num)
+void push(char **linearray, stack_t **rear, unsigned int linenum)
 {
-        char c;
-        int char_read = 1;
-        char integer[12];
-        int i = 1;
-        char j = 0;
-        stack_t *temp_head, *new_node;
+        int i;
+        stack_t *new_node;
 
-        fill_integer(integer);
-        char_read = read(fd, &c, 1);
-        while (c == ' ' && char_read > 0)
-            char_read = read(fd, &c, 1);
-        if (c == '\n' || char_read == 0 || (c != '-' && (c < '0' || c > '9')))
-            errcp(line_num);
-        temp_head = (stack_head == NULL) ? NULL : *stack_head;
-        new_node = malloc(sizeof(*new_node));
-        if (new_node == NULL)
-            errcm();
-        new_node->next = new_node->prev = NULL;
-        if (c == '-')
-            char_read = get_neg(integer, &c, &j, line_num, &i);
-        else
-            char_read =  get_pos(integer, &c, &j, line_num, &i);
-        get_all(integer, &c, &char_read, j, i, line_num);
-        c = skip_after(c, &char_read);
-        while (temp_head != NULL && temp_head->next != NULL)
-            temp_head = temp_head->next;
-        new_node->n = atoi(integer);
-        if (*stack_head == NULL)
-        {
-            *stack_head = new_node;
-        }
-        else
-        {
-            temp_head->next = new_node;
-            new_node->prev = temp_head;
-        }
+	if (!linearray[1])
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", linenum);
+		goto error;
+	}
+	if ((linearray[1][0] < '0' || linearray[1][0] > '9') && linearray[1][0] != '-')
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", linenum);
+		goto error;
+	}
+	for (i = 1; linearray[1][i]; i++)
+	{
+		if (linearray[1][i] < '0' || linearray[1][i] > '9')
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", linenum);
+			goto error;
+		}
+	}
+	new_node = malloc(sizeof(*new_node));
+	if (!new_node)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		goto error;
+	}
+	new_node->n = atoi(linearray[1]);
+	new_node->next = NULL;
+	if (!(*rear))
+	{
+		new_node->prev = NULL;
+		*rear = new_node;
+		return;
+	}
+	new_node->prev = *rear;
+	(*rear)->next = new_node;
+	*rear = new_node;
+	return;
+error:
+	printf("Here\n");
+	freewarray(linearray);
+	freestack(*rear);
+	exit(EXIT_FAILURE);
 }
 
-void pall(stack_t **stack_head, unsigned int line_num)
+void pall(char **linearray __attribute__((unused)), stack_t **rear, unsigned int linenum __attribute__((unused)))
 {
         stack_t *temp;
-        int char_read = 1;
-        char c = '\0';
 
-        if (stack_head == NULL || *stack_head == NULL || line_num == 1)
-        {
-            c = skip_after(c, &char_read);
-            return;
-        }
-        temp = *stack_head;
-        while (temp->next != NULL)
-            temp = temp->next;
-        while (temp != NULL)
-        {
-            printf("%d\n", temp->n);
-            temp = temp->prev;
-        }
-        c = skip_after(c, &char_read);
+        temp = *rear;
+        while (temp)
+	{
+		printf("%d\n", temp->n);
+		temp = temp->prev;
+	}
 }
 
-void pint(stack_t **stack_head, unsigned int line_num)
+/*void pint(stack_t **stack_head, unsigned int line_num)
 {
         stack_t *temp;
         int char_read = 1;
@@ -147,4 +144,4 @@ void swap(stack_t **stack_head, unsigned int line_num)
         temp->prev = temp->next;
         temp->next = NULL;
         skip_after(c, &char_read);
-}
+} */

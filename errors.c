@@ -3,15 +3,13 @@
 #include <stdio.h>
 #include "monty.h"
 
-extern int fd;
-
 /**
  * errnf - when no file is provided form the CLI
  */
 
 void errnf(void)
 {
-        fprintf(stderr ,"USAGE: monty file\n");
+        fprintf(stderr ,"USAGE: monty file\n");	
         exit(EXIT_FAILURE);
 }
 
@@ -23,8 +21,8 @@ void errnf(void)
 
 void errno(unsigned int line_num, char opcode[])
 {
-        fprintf(stderr ,"L%u: unknown instruction %s\n", line_num, opcode);
-        close(fd);
+        fprintf(stderr ,"L%u: unknown %s\n", line_num, opcode);
+        fclose(fd);
         exit(EXIT_FAILURE);
 }
 
@@ -43,20 +41,20 @@ void errco(char *filename)
  * errcp - can't push
  */
 
-void errcp(unsigned int line_num)
+/*void errcp(unsigned int line_num)
 {
         fprintf(stderr, "L%u: usage: push integer\n", line_num);
-        close(fd);
+        fclose(fd);
         exit(EXIT_FAILURE);
-}
+}*/
 
 /**
  * errcm - can't malloc
  */
 
-void errcm(void)
+/*void errcm(void)
 {
         fprintf(stderr, "Error: malloc failed\n");
-        close(fd);
+        fclose(fd);
         exit(EXIT_FAILURE);
-}
+}*/

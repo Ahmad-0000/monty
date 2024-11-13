@@ -1,5 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
+#include <stdio.h>
+#include <unistd.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -27,14 +29,14 @@ typedef struct stack_s
 typedef struct instruction_s
 {
         char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
-} instruction_t;
-extern int fd;
+        void (*f)(char **linearray, stack_t **rear, unsigned int line_number);
+} instr_t;
+extern FILE *fd;
 
 /*              Opcode Functions                */
 
-void push(stack_t **stack_head, unsigned int line_num);
-void pall(stack_t **stack_head, unsigned int line_num);
+void push(char **linearray, stack_t **rear, unsigned int line_num);
+void pall(char **linearray, stack_t **rear, unsigned int line_num);
 void pint(stack_t **stack_head, unsigned int line_num);
 void pop(stack_t **stack_head, unsigned int line_num);
 void swap(stack_t **stack_head, unsigned int line_num);
@@ -54,7 +56,7 @@ void rotr(stack_t **stack_head, unsigned int line_num);
 char skip_before(char c, int *char_read, unsigned int *line_num);
 char skip_after(char c, int *char_read);
 void fill(int n, char *opcode);
-void execute(char opcode[], unsigned int line_num, stack_t **stack_head);
+void exec(char **linearray, unsigned int linenum, stack_t **rear);
 void fill_integer(char *integer);
 
 /*              Helping Functions 2             */
@@ -89,4 +91,9 @@ void errcpc(unsigned int line_num);
 /*              Error Messages Functions 4              */
 
 void errcpc2(unsigned int line_num);
+
+char **strtow(char *);
+void freewarray(char **warray);
+void freestack(stack_t *head);
+ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 #endif
