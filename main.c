@@ -43,9 +43,10 @@ int main(int argc, char *argv[])
 			{
 				line[i] = '\0';
 				break;
-			}	
+			}
 		linearray = strtow(line);
-		exec(linearray, linenum, &rear);
+		if (linearray)
+			exec(linearray, linenum, &rear);
 		freewarray(linearray);
 		linenum++;
 	}
