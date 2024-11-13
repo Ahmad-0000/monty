@@ -23,8 +23,8 @@ void exec(char **linearray, unsigned int linenum, stack_t **rear)
                 {"sub", sub},
                 {"div", divison},
                 {"mul", mul},
-                /*{"mod", mod},
-                {"pchar", pchar},
+                {"mod", mod},
+                /*{"pchar", pchar},
                 {"pstr", pstr},
                 {"rotl", rotl},
                 {"rotr", rotr}*/
@@ -32,7 +32,7 @@ void exec(char **linearray, unsigned int linenum, stack_t **rear)
 
 	if (!linearray[0])
 		return;
-        for (i = 0; i < 10; i++)
+        for (i = 0; i < 11; i++)
        	{
 		if (!strcmp(linearray[0], array[i].opcode))
 		{

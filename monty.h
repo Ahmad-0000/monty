@@ -45,7 +45,7 @@ void sub(char **linearray, stack_t **rear, unsigned int line_num);
 void nop(char **linearray, stack_t **rear, unsigned int line_num);
 void divison(char **linearray, stack_t **rear, unsigned int line_num);
 void mul(char **linearray, stack_t **rear, unsigned int line_num);
-void mod(stack_t **stack_head, unsigned int line_num);
+void mod(char **linearray, stack_t **rear, unsigned int line_num);
 void pchar(stack_t **stack_head, unsigned int line_num);
 void pstr(stack_t **stack_head, unsigned int line_num);
 void rotl(stack_t **stack_head, unsigned int line_num);
