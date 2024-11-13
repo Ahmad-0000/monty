@@ -3,6 +3,8 @@
 
 void freestack(stack_t *rear)
 {
+	if (!rear)
+		return;
 	while (rear->prev)
 	{
 		rear = rear->prev;
