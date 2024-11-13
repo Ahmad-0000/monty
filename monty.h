@@ -37,11 +37,11 @@ extern FILE *fd;
 
 void push(char **linearray, stack_t **rear, unsigned int line_num);
 void pall(char **linearray, stack_t **rear, unsigned int line_num);
-void pint(stack_t **stack_head, unsigned int line_num);
-void pop(stack_t **stack_head, unsigned int line_num);
-void swap(stack_t **stack_head, unsigned int line_num);
-void add(stack_t **stack_head, unsigned int line_num);
-void nop(stack_t **stack_head, unsigned int line_num);
+void pint(char **linearray, stack_t **rear, unsigned int line_num);
+void pop(char **linearray, stack_t **rear, unsigned int line_num);
+void swap(char **linearray, stack_t **rear, unsigned int line_num);
+void add(char **linearray, stack_t **rear, unsigned int line_num);
+void nop(char **linearray, stack_t **rear, unsigned int line_num);
 void sub(stack_t **stack_head, unsigned int line_num);
 void divide(stack_t **stack_head, unsigned int line_num);
 void mul(stack_t **stack_head, unsigned int line_num);
@@ -67,7 +67,7 @@ void get_all(char *integer, char *c, int *cread, char j,int i, unsigned int ln);
 
 /*              Error Messages Functions                */
 
-void errno(unsigned int line_num, char opcode[]);
+void errno(unsigned int line_num, char **linearray);
 void errnf(void);
 void errco(char *filename);
 void errcp(unsigned int line_num);
