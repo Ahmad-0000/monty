@@ -14,13 +14,13 @@ void exec(char **linearray, unsigned int linenum, stack_t **rear)
 	int i;
 	instr_t array[] = {
 		{"push", push},
-	       	{"pall", pall}
-		/*{"pint", pint},
+	       	{"pall", pall},
+		{"pint", pint},
                 {"pop", pop},
                 {"swap", swap},
                 {"add", add},
                 {"nop", nop},
-                {"sub", sub},
+                /*{"sub", sub},
                 {"div", divide},
                 {"mul", mul},
                 {"mod", mod},
@@ -32,7 +32,7 @@ void exec(char **linearray, unsigned int linenum, stack_t **rear)
 
 	if (!linearray[0])
 		return;
-        for (i = 0; i < 2; i++)
+        for (i = 0; i < 7; i++)
        	{
 		if (!strcmp(linearray[0], array[i].opcode))
 		{
@@ -40,7 +40,6 @@ void exec(char **linearray, unsigned int linenum, stack_t **rear)
 			return;
 		}
         }
-	freewarray(linearray);
 	freestack(*rear);
-        errno(linenum, linearray[0]);
+        errno(linenum, linearray);
 }
