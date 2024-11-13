@@ -48,3 +48,19 @@ void pchar(char **linearray, stack_t **rear, unsigned int linenum)
 	}
 	printf("%c\n", (*rear)->n);
 }
+
+
+void pstr(char **linearray __attribute__((unused)), stack_t **rear, unsigned int linenum __attribute__((unused)))
+{
+        stack_t *temp;
+
+        temp = *rear;
+        while (temp && temp->n)
+	{
+		if (temp->n > 127 || temp->n < 0)
+			break;
+		printf("%c", temp->n);
+		temp = temp->prev;
+	}
+	putchar('\n');
+}
